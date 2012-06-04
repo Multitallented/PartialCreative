@@ -1,0 +1,9 @@
+author: multitallented
+database: false
+description: creates a mode for players where they and be creative without interfering
+  with other players.
+generator: http://dinnerbone.com/minecraft/tools/pluginator/
+main: redcastlemedia.multitallented.bukkit.partialcreative.PartialCreative
+name: PartialCreative
+startup: postworld
+version: '1.0'
