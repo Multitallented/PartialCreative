@@ -149,11 +149,11 @@ public class PartialCreative extends JavaPlugin {
     
     if (playerModes.contains(p)) {
       for (String s : modePerms) {
-        perms.playerRemove(p, s);
+        perms.playerAddTransient(p, s);
       }
     } else {
       for (String s : modePerms) {
-        perms.playerAdd(p, s);
+        perms.playerAddTransient(p, s);
       }
     }
   }
