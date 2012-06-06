@@ -21,7 +21,7 @@ public class ConfigManager {
     try {
       File folder = plugin.getDataFolder();
       if (!folder.exists()) {
-        folder.createNewFile();
+        folder.mkdirs();
       }
       File configFile = new File(plugin.getDataFolder(), "config.yml");
       if (!configFile.exists()) {

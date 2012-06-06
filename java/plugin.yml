@@ -6,4 +6,14 @@ generator: http://dinnerbone.com/minecraft/tools/pluginator/
 main: redcastlemedia.multitallented.bukkit.partialcreative.PartialCreative
 name: PartialCreative
 startup: postworld
-version: '1.0'
+version: '0.1a'
+depend: [Vault]
+commands:
+   partialcreative:
+      aliases: ['pcm']
+      description: Toggle partial creative mode
+      usage: /<command>
+permissions:
+   partialcreative.toggle:
+      description: Allows you to toggle partial creative mode
+      default: false

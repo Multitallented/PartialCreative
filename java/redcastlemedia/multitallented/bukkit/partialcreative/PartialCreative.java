@@ -76,7 +76,7 @@ public class PartialCreative extends JavaPlugin {
   
   @Override
   public boolean onCommand(CommandSender cs, Command command, String label, String[] args) {
-    if (label.equals("pc") && (cs instanceof Player)) {
+    if (cs instanceof Player) {
       Player p = (Player) cs;
       if (playerModes.contains(p)) {
         ArrayList<ItemStack> oldItems = previousItems.containsKey(p) ? previousItems.get(p) : new ArrayList<ItemStack>();
@@ -84,14 +84,14 @@ public class PartialCreative extends JavaPlugin {
         setPlayerInventory(p, oldItems);
         togglePerms(p);
         playerModes.remove(p);
-        p.sendMessage(ChatColor.GRAY + "[PartialCreative] You are now in partial creative mode.");
+        p.sendMessage(ChatColor.GRAY + "[PartialCreative] You are now in non-partial creative mode.");
       } else {
         ArrayList<ItemStack> oldItems = previousItems.containsKey(p) ? previousItems.get(p) : new ArrayList<ItemStack>();
         previousItems.put(p, storeInventory(p));
         setPlayerInventory(p, oldItems);
         togglePerms(p);
         playerModes.add(p);
-        p.sendMessage(ChatColor.GRAY + "[PartialCreative] You are now in non-partial creative mode.");
+        p.sendMessage(ChatColor.GRAY + "[PartialCreative] You are now in partial creative mode.");
       }
       return true;
     }
@@ -113,6 +113,9 @@ public class PartialCreative extends JavaPlugin {
   private void setPlayerInventory(Player p, ArrayList<ItemStack> oldItems) {
     PlayerInventory pi = p.getInventory();
     pi.clear();
+    if (oldItems.size() < 4) {
+      return;
+    } 
     pi.setHelmet(oldItems.get(0));
     pi.setChestplate(oldItems.get(1));
     pi.setLeggings(oldItems.get(2));
