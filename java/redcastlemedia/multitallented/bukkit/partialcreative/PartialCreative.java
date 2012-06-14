@@ -1,5 +1,6 @@
 package redcastlemedia.multitallented.bukkit.partialcreative;
 
+import com.Acrobot.ChestShop.ChestShop;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -23,6 +24,7 @@ public class PartialCreative extends JavaPlugin {
   private static HashSet<Player> playerModes = new HashSet<Player>();
   private static HashSet<String> modePerms = new HashSet<String>();
   private static Permission perms;
+  public static ChestShop chestShop;
   
   @Override
   public void onDisable() {
@@ -69,10 +71,34 @@ public class PartialCreative extends JavaPlugin {
         }
       }, this);
     }
+    if (Bukkit.getPluginManager().isPluginEnabled("ChestShop")) {
+      chestShop = (ChestShop) Bukkit.getPluginManager().getPlugin("ChestShop");
+      //registerChestShopEvent();
+    } else {
+      Bukkit.getPluginManager().registerEvents(
+        new Listener() {
+          @EventHandler
+          public void onPluginEnable(PluginEnableEvent event) {
+            if (event.getPlugin().getDescription().getName().equals("ChestShop")) {
+              PartialCreative.chestShop = (ChestShop) event.getPlugin();
+              //registerChestShopEvent();
+            }
+          }
+
+        }, this);   
+    }
     
     
     System.out.println("[PartialCreative] has been enabled.");
   }
+  
+  /*private void registerChestShopEvent() {
+    Bukkit.getPluginManager().registerEvents(
+      new Listener() {
+        @EventHandler
+        public void onShopInteract()
+      }, this);
+  }*/
   
   @Override
   public boolean onCommand(CommandSender cs, Command command, String label, String[] args) {

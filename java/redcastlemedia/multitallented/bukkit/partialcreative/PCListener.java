@@ -40,7 +40,7 @@ public class PCListener implements Listener {
       return;
     }
     event.setCancelled(true);
-    ((Player) event.getPlayer()).sendMessage(ChatColor.GRAY + "[PartialCreative] You can't do that while in /pc");
+    ((Player) event.getPlayer()).sendMessage(ChatColor.GRAY + "[PartialCreative] You can't do that while in /pcm");
   }
   
   @EventHandler
@@ -49,7 +49,7 @@ public class PCListener implements Listener {
       return;
     }
     event.setCancelled(true);
-    event.getPlayer().sendMessage(ChatColor.GRAY + "[PartialCreative] You can't do that while in /pc");
+    event.getPlayer().sendMessage(ChatColor.GRAY + "[PartialCreative] You can't do that while in /pcm");
   }
   
   @EventHandler
@@ -66,6 +66,8 @@ public class PCListener implements Listener {
       event.setHatching(false);
     }
   }
+  
+  
   
   
 }
