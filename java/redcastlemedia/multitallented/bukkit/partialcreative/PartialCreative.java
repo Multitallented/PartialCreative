@@ -78,13 +78,23 @@ public class PartialCreative extends JavaPlugin {
   public boolean onCommand(CommandSender cs, Command command, String label, String[] args) {
     if (cs instanceof Player) {
       Player p = (Player) cs;
+      if (args.length > 0 && args[0].equalsIgnoreCase("clear") && PartialCreative.isPlayerInMode(p)) {
+          p.getInventory().clear();
+          p.sendMessage(ChatColor.GOLD + "[PartialCreative] Your inventory has been cleared.");
+          return true;
+      }
+      
+      if (perms != null && !perms.has(p, "partialcreative.toggle")) {
+        p.sendMessage(ChatColor.GRAY + "[PartialCreative] You don't have permission to do that.");
+        return true;
+      }
       if (playerModes.contains(p)) {
         ArrayList<ItemStack> oldItems = previousItems.containsKey(p) ? previousItems.get(p) : new ArrayList<ItemStack>();
         previousItems.put(p, storeInventory(p));
         setPlayerInventory(p, oldItems);
         togglePerms(p);
         playerModes.remove(p);
-        p.sendMessage(ChatColor.GRAY + "[PartialCreative] You are now in non-partial creative mode.");
+        p.sendMessage(ChatColor.GRAY + "[PartialCreative] You are no longer in partial creative mode.");
       } else {
         ArrayList<ItemStack> oldItems = previousItems.containsKey(p) ? previousItems.get(p) : new ArrayList<ItemStack>();
         previousItems.put(p, storeInventory(p));
